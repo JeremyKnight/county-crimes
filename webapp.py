@@ -128,7 +128,7 @@ def setDepartmentChosen(department):
 
 if __name__=="__main__":
     #make debug False when you are done with website.
-    app.run(debug=True, port=54321)
+    app.run(debug=False, port=54321)
 
     '''fun facts:
     1) chart of average crime rate in a given state

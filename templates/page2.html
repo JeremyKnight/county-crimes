@@ -2,9 +2,74 @@
 {% set activePage = "page2"%}
 
 {% block title %} page 2 {% endblock %}
- 
-    
+
+
     <!--page content-->
 {% block content %}
     <h1>Page 2</h1>
-{% endblock%}    
+
+<!--{{counties}}-->
+
+    {% if stateShow %}
+    <div id="state">
+    <p>select state: </p>
+    <form action="p2">
+      <select name="state">
+        {{state_options}}
+      </select>
+    </div>
+    {% endif %}
+
+    {% if departmentShow %}
+      <div id="department">
+      <p>select county: </p>
+      <form action="p2">
+        <select name="department">
+          {{departments_options}}
+        </select>
+      </div>
+      {% endif %}
+
+      <br>
+      <br>
+  <input type= "submit">
+</form>
+
+
+{%if graphShow%}
+
+    <script type="text/javascript">
+  window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer", {
+
+      title:{
+        text: "Violent crimes per year at: " /**+ str({{department}}) + "in " + str({{state}})***/
+      },
+      data: [//array of dataSeries
+        { //dataSeries object
+
+         /*** Change type "column" to "bar", "area", "line" or "pie"***/
+         type: "line",
+         dataPoints: [
+         /***{ label: "banana", y: 18 },
+         { label: "orange", y: 29 },
+         { label: "apple", y: 40 },
+         { label: "mango", y: 34 },
+         { label: "grape", y: 24 }***/
+          {{ graphValues }}
+       ]
+
+       }
+       ]
+     });
+
+    chart.render();
+  }
+  </script>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+  <div id="chartContainer" style="height: 300px; width: 100%;">
+  </div>
+  {%endif%}
+{% endblock%}

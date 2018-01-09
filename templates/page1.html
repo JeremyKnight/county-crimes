@@ -2,9 +2,47 @@
 {% set activePage = "page1"%}
 
 {% block title %} Page 1 {% endblock %}
- 
-    
+
+
     <!--page content-->
 {% block content %}
     <h1>Page 1</h1>
-{% endblock%}   
+    {% if stateShow %}
+    <div id="state">
+    <p>select state: </p>
+    <form action="p1">
+      <select name="state">
+        {{state_options}}
+      </select>
+    </div>
+    {% endif %}
+
+    {% if departmentShow %}
+      <div id="department">
+      <p>select county: </p>
+      <form action="p1">
+        <select name="department">
+          {{departments_options}}
+        </select>
+      </div>
+      {% endif %}
+
+      {% if yearShow %}
+      <div id="year">
+        <p> select year: </p>
+        <form action="p1">
+          <select name="year">
+            {{year_options}}
+          </select>
+        </div>
+        {% endif %}
+
+      <br>
+      <br>
+  <input type= "submit">
+</form>
+{% if response is defined %}
+        <p> {{ response }}</p>
+{% endif %}
+
+{% endblock%}
